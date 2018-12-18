@@ -93,30 +93,30 @@
 	</div>
 	<script type="text/javascript">
 		$('#payment_form').bind('keyup blur', function () {
-			// $.ajax({
-			// 	url: 'http://localhost:3000',
-			// 	type: 'post',
-			// 	data: JSON.stringify({
-			// 		key: $('#key').val(),
-			// 		salt: $('#salt').val(),
-			// 		txnid: $('#txnid').val(),
-			// 		amount: $('#amount').val(),
-			// 		pinfo: $('#pinfo').val(),
-			// 		fname: $('#fname').val(),
-			// 		email: $('#email').val(),
-			// 		mobile: $('#mobile').val(),
-			// 		udf5: $('#udf5').val()
-			// 	}),
-			// 	contentType: "application/json",
-			// 	dataType: 'json',
-			// 	success: function (json) {
-			// 		console.log(json)
-			// 		$('#hash').val(json);
-			// 	}
-			// });
-			var json =
-				"813f4926ad185c677e88c74f538f27124c66795596939c22f51f27fcb0ecfba8b1815c10d02829bbe9fd0f9bcc9c1e2c24f3843696486a1a07c06a97f3522242"
-			$('#hash').val(json)
+			$.ajax({
+				url: 'http://localhost:3000',
+				type: 'post',
+				data: JSON.stringify({
+					key: $('#key').val(),
+					salt: $('#salt').val(),
+					txnid: $('#txnid').val(),
+					amount: $('#amount').val(),
+					pinfo: $('#pinfo').val(),
+					fname: $('#fname').val(),
+					email: $('#email').val(),
+					mobile: $('#mobile').val(),
+					udf5: $('#udf5').val()
+				}),
+				contentType: "application/json",
+				dataType: 'json',
+				success: function (json) {
+					console.log(json)
+					$('#hash').val(json);
+				}
+			});
+			// var json =
+			// 	"813f4926ad185c677e88c74f538f27124c66795596939c22f51f27fcb0ecfba8b1815c10d02829bbe9fd0f9bcc9c1e2c24f3843696486a1a07c06a97f3522242"
+			// $('#hash').val(json)
 		});
 	</script>
 	<script type="text/javascript">
