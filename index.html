@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <script id="bolt" src="https://sboxcheckout-static.citruspay.com/bolt/run/bolt.min.js" bolt- color="e34524"
+        bolt-logo="http://boltiswatching.com/wp-content/uploads/2015/09/Bolt-Logo-e14421724859591.png"></script>
+</head>
+
+<body>
+    <h2>PAy U</h2>
+    <button type="button" onclick="payuinit()">Pay U init</button>
+    <script>
+        var pd = {
+            key: "n4wc4WrA",
+            txnid: "ORD122",
+            amount: "6.00",
+            firstname: "admin",
+            email: "email@gmail.com",
+            phone: "1234567890",
+            productinfo: "recharge",
+            surl: "http://localhost:3000/saveToBackend",
+            furl: "http://localhost:3000/saveToBackend",
+            hash: "d7a6d32faa3e0edc0bc727b8d7b9fecfa9fa42e8888e2466aa0866303eecfcd67e06e9debeda32883cc0c4fd75c6656b68591cfa0fae1ee8b063ec7b33a3279d"
+        };
+
+        function payuinit() {
+            console.log("running", pd)
+            bolt.launch(pd, {
+                responseHandler: function (BOLT) {
+                    console.log("bolt response", BOLT.response);
+
+                    // debugger;
+                    if (BOLT.response.txnStatus != 'CANCEL') {
+                        console.log("succes")
+                        //Salt is passd here for demo purpose only. For practical use keep salt at server side only.
+                    }
+                },
+                catchException: function (BOLT) {
+                    console.log(BOLT.message);
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
