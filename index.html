@@ -14,8 +14,62 @@
 </head>
 
 <body>
-    <h2>PAy U</h2>
-    <button type="button" onclick="payuinit()">Pay U init</button>
+    <h2>PAy U -try 1</h2>
+    <button type="button" onclick="payuinit()">Pay U doesnt work here!</button>
+
+    <h2>Pay U -try 2</h2>
+
+    <form action="#" id="payment_form">
+        <input type="hidden" id="udf5" name="udf5" value="BOLT_KIT_NODE_JS" />
+        <input type="hidden" id="surl" name="surl" value="http://localhost:3000/saveToBackend" />
+        <div class="dv">
+            <span class="text"><label>Merchant Key:</label></span>
+            <span><input type="text" id="key" name="key" placeholder="Merchant Key" value="n4wc4WrA" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>Merchant Salt:</label></span>
+            <span><input type="text" id="salt" name="salt" placeholder="Merchant Salt" value="1cKbR7s0cz" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>Transaction/Order ID:</label></span>
+            <span><input type="text" id="txnid" name="txnid" placeholder="Transaction ID" value="ORD122" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>Amount:</label></span>
+            <span><input type="text" id="amount" name="amount" placeholder="Amount" value="6.00" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>Product Info:</label></span>
+            <span><input type="text" id="pinfo" name="pinfo" placeholder="Product Info" value="P01,P02" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>First Name:</label></span>
+            <span><input type="text" id="fname" name="fname" placeholder="First Name" value="" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>Email ID:</label></span>
+            <span><input type="text" id="email" name="email" placeholder="Email ID" value="" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>Mobile/Cell Number:</label></span>
+            <span><input type="text" id="mobile" name="mobile" placeholder="Mobile/Cell Number" value="" /></span>
+        </div>
+
+        <div class="dv">
+            <span class="text"><label>Hash:</label></span>
+            <span><input type="text" id="hash" name="hash" placeholder="Hash" value="" /></span>
+        </div>
+        <div id="alertinfo" class="dv"></div>
+
+        <div><input type="submit" value="Pay" id="splButton" onclick="launchBOLT(); return false;" /></div>
+    </form>
     <script>
         var pd = {
             key: "n4wc4WrA",
@@ -46,6 +100,36 @@
                     console.log(BOLT.message);
                 }
             });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function launchBOLT() {
+
+            bolt.launch({
+                key: "n4wc4WrA",
+                txnid: $('#txnid').val(),
+                hash: $('#hash').val(),
+                amount: "6.00",
+                firstname: $('#fname').val(),
+                email: $('#email').val(),
+                phone: $('#mobile').val(),
+                productinfo: $('#pinfo').val(),
+                udf5: $('#udf5').val(),
+                surl: $('#surl').val(),
+                furl: $('#surl').val()
+            }, {
+                responseHandler: function (BOLT) {
+                    console.log("bolt response", BOLT.response);
+                    if (BOLT.response.txnStatus != 'CANCEL') {
+                        console.log("ops its not canceled")
+                    }
+                },
+                catchException: function (BOLT) {
+                    console.log(BOLT.message);
+                }
+            });
+
         }
     </script>
 </body>
