@@ -42,7 +42,7 @@ app.post('/', function (req, res) {
 	req.on('end', function () {
 		var data = JSON.parse(strdat);
 		var cryp = crypto.createHash('sha512');
-		var text = MERCHANT_KEY + '|' + data.txnid + '|' + data.amount + '|' + data.pinfo + '|' + data.fname + '|' + data.email + '|||||' + data.udf5 + '||||||' + MERCHANT_SALT;
+		var text = MERCHANT_KEY + '|' + data.txnid + '|' + data.amount + '|' + data.productinfo + '|' + data.firstname + '|' + data.email + '|||||' + data.udf5 + '||||||' + MERCHANT_SALT;
 		cryp.update(text);
 		var hash = cryp.digest('hex');
 		res.setHeader("Content-Type", "text/json");

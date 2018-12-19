@@ -71,22 +71,35 @@
         <div><input type="submit" value="Pay" id="splButton" onclick="launchBOLT(); return false;" /></div>
     </form>
     <script>
-        var pd = {
+        const pd = {
+            udf5: "BOLT_KIT_NODE_JS",
             key: "n4wc4WrA",
-            txnid: "ORD122",
-            amount: "6.00",
-            firstname: "admin",
-            email: "email@gmail.com",
-            phone: "1234567890",
+            txnid: "PAYEEM",
+            amount: "10",
+            firstname: "user",
+            email: "",
+            phone: "",
             productinfo: "recharge",
             surl: "http://localhost:3000/saveToBackend",
             furl: "http://localhost:3000/saveToBackend",
-            hash: "d7a6d32faa3e0edc0bc727b8d7b9fecfa9fa42e8888e2466aa0866303eecfcd67e06e9debeda32883cc0c4fd75c6656b68591cfa0fae1ee8b063ec7b33a3279d"
+            hash: "7bb2a8aee4d946e6338a9961b4b82010918fa37b13b3ee0f1ff3f40ce2e66284403116324d30707f4a3a7da7fd1edc5276ffb5984d401a304bdf37c46c2be2be"
         };
 
         function payuinit() {
             console.log("running", pd)
-            bolt.launch(pd, {
+            bolt.launch({
+                key: pd.key,
+                txnid: pd.txnid,
+                hash: pd.hash,
+                amount: pd.amount,
+                firstname: pd.firstname,
+                email: pd.email,
+                phone: pd.phone,
+                productinfo: pd.productinfo,
+                udf5: pd.udf5,
+                surl: pd.surl,
+                furl: pd.furl,
+            }, {
                 responseHandler: function (BOLT) {
                     console.log("bolt response", BOLT.response);
 
@@ -112,13 +125,14 @@
         );
 
         function launchBOLT() {
-
+            var fname1 = jQuery('<input type="hidden" id="fname1" name="fname1" value="bbb" />');
+            console.log(fname1, fname1.val());
             bolt.launch({
                 key: "n4wc4WrA",
-                txnid: $('#txnid').val(),
+                txnid: "ORD122",
                 hash: $('#hash').val(),
                 amount: "6.00",
-                firstname: $('#fname').val(),
+                firstname: "bbb",
                 email: $('#email').val(),
                 phone: $('#mobile').val(),
                 productinfo: $('#pinfo').val(),
